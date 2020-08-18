@@ -14,6 +14,7 @@
 int main()
 {
 	int arr[MAX] = {0};
+	int i, j, t;
 	int Num, m, Max_time, count, times=1;
 	printf("请输入10个数字：\n");
 	for(count=0; count<MAX; count++)
@@ -23,6 +24,16 @@ int main()
 
 	Num = arr[0];
 	Max_time = 1;
+	for(i = MAX-1; i > 0; i-- )
+		for(j = 0; j < i; j++)
+		{
+			if(arr[j] > arr[j+1])
+			{
+				t = arr[j+1];
+				arr[j+1] = arr[j];
+				arr[j] = t;
+			}
+		}
 	for(count=0; count<MAX-1; count++)
 	{
 		m = arr[count];
