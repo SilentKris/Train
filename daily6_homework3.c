@@ -5,13 +5,14 @@
 int main()
 {
 	int arr[MAX], Num = MAX;
-	int Min, Max, Min_index, Max_index;
+	int Min=0, Max=0, Min_index, Max_index;
 	int count;
 
 	printf("请输入%d个数字：", Num);
 	for(count = 0; count < MAX; count++)
 		scanf("%d", &arr[count]);
 
+#if 0
 
 	if(arr[0] >= arr[1])
 	{
@@ -40,15 +41,24 @@ int main()
 			Min_index = count;
 		}
 	}
-	
+#else
+	for(count=0; count<MAX; count++)
+	{
+		if(arr[Max] < arr[count])
+			Max = count;
+		if(arr[Min] > arr[count])
+			Min= count;
+	}
+#endif
 	printf("遍历该数组为：arr[%d] = ", Num);
 	for(count = 0; count < MAX; count++)
 	{
 		printf("%-5d", arr[count]);
 	}
 	putchar('\n');
-	printf("Max = %d, Max_index = %d\nMin = %d, Min_index = %d\n", Max, Max_index, Min, Min_index);
-
+//	printf("Max = %d, Max_index = %d\nMin = %d, Min_index = %d\n", Max, Max_index, Min, Min_index);
+	printf("arr[Max] = %d, Max = %d, arr[Min] = %d, Min = %d\n", arr[Max], Max, arr[Min], Min);
+	
 
 
 	return 0;
