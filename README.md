@@ -1,2 +1,1 @@
-This my code during my Train
-# Train
+改为缩写
