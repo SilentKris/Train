@@ -1,13 +1,7 @@
 	.file	"test.c"
 	.section	.rodata
 .LC0:
-	.string	"arr = %p\n"
-.LC1:
-	.string	"&arr = %p\n"
-.LC2:
-	.string	"arr + 1 = %p\n"
-.LC3:
-	.string	"&arr + 1 = %p\n"
+	.string	"%d\n"
 	.text
 	.globl	main
 	.type	main, @function
@@ -21,37 +15,20 @@ main:
 	.cfi_def_cfa_register 5
 	andl	$-16, %esp
 	subl	$32, %esp
-	movl	%gs:20, %eax
-	movl	%eax, 28(%esp)
-	xorl	%eax, %eax
+	movb	$0, 31(%esp)
+	movb	$0, 31(%esp)
+	jmp	.L2
+.L3:
+	addb	$1, 31(%esp)
+.L2:
+	cmpb	$4, 31(%esp)
+	jle	.L3
+	movsbl	31(%esp), %edx
 	movl	$.LC0, %eax
-	leal	18(%esp), %edx
-	movl	%edx, 4(%esp)
-	movl	%eax, (%esp)
-	call	printf
-	movl	$.LC1, %eax
-	leal	18(%esp), %edx
-	movl	%edx, 4(%esp)
-	movl	%eax, (%esp)
-	call	printf
-	movl	$.LC2, %eax
-	leal	18(%esp), %edx
-	addl	$1, %edx
-	movl	%edx, 4(%esp)
-	movl	%eax, (%esp)
-	call	printf
-	movl	$.LC3, %eax
-	leal	18(%esp), %edx
-	addl	$10, %edx
 	movl	%edx, 4(%esp)
 	movl	%eax, (%esp)
 	call	printf
 	movl	$0, %eax
-	movl	28(%esp), %edx
-	xorl	%gs:20, %edx
-	je	.L2
-	call	__stack_chk_fail
-.L2:
 	leave
 	.cfi_restore 5
 	.cfi_def_cfa 4, 4

@@ -2,15 +2,37 @@
 #include <string.h>
 int main()
 {
-	char arr[10];
-	char *p; 
+	char s[64] = {"hello world mone student"};
+	char *p[4] = {0};
+	int i = 0, j = 0;
 
-	printf("arr = %p\n", arr);
-	printf("&arr = %p\n", &arr);
-	printf("arr + 1 = %p\n", arr+1);
-	printf("&arr + 1 = %p\n", &arr + 1);
-
+	if(s[0] != ' ')
+	{
+		p[j] = &s[0];
+		i++;
+		j++;
+	}
 	
+	while(s[i] != '\0')
+	{
+		if(s[i] != ' ' && (s[i-1] == '\0' || s[i-1] == ' '))
+		{
+			p[j] = &s[i];
+			j++;
+		}
+		if(s[i] == ' ' && s[i-1] != ' ')
+		{
+			s[i] = '\0';
+		}
+		if(s[i+1] != '\0')
+			i++;
+		else
+			break;
+		
+	}
+	for(i=0; i<4; i++)
+		puts(p[i]);
+
 	return 0;
 
 }
