@@ -1,17 +1,21 @@
 #include <stdio.h>
 
+#define offsetof(TYPE, MEMBER) ((size_t)&((TYPE)0)->MEMBER)
+
 typedef struct Struction{
-	char a; 
-	int b;
-	char c;
-	short d;
+	char a;  //1 B 
+	char b;  //3 B
+	int c;   //4 B 
+	double d;//8 B
 	int e;
 
-} Struct;
+} Struct, *p;
 
 int main(int argc, char **argv)
 {
 	Struct i;
+	Struct *h;
+	printf("the offset of d = %d\n", offsetof(p, d));
 	printf("sizeof a = %d\n", (char *)&i.b - (char *)&i.a);
 	printf("sizeof b = %d\n", (char *)&i.c - (char *)&i.b);
 	printf("sizeof c = %d\n", (char *)&i.d - (char *)&i.c);
