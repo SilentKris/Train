@@ -1,17 +1,17 @@
-#ifndef __COMMON_H
-#define __COMMON_H
+#ifndef _COMMON_H__
+#define _COMMON_H__
 
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <stdio.h>
 #include <unistd.h>
 
-char *PATHNAME = ".";
-int PROJ_ID = 0x66;
+#define PATHNAME "."
+#define PROJ_ID 0x6666
 
-
-
-
-
+int CreateShm(int size);
+int DestroyShm(int shmid);
+int GetShm(int size);
 #endif
+

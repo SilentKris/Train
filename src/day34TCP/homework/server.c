@@ -16,7 +16,7 @@ int main(void)
 
 	addr.sin_family=PF_INET;
 	addr.sin_port = htons(8888);
-	addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	addr.sin_addr.s_addr = inet_addr("192.168.162.169");
 	
 	sockfd = socket(PF_INET,SOCK_STREAM,0);
 	if(sockfd==-1){

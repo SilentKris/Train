@@ -13,31 +13,20 @@ size_t SIZE = 2048;
 int shmid;
 
 
-
 int main(int argc, char **argv)
 {
-	char buf[N];
+	int count = 1000;
 	key_t key = ftok(PATHNAME, PROJ_ID);
 
-	shmid = shmget(key, SIZE, IPC_CREAT | 0666 );
+	shmid = shmget(key, SIZE, IPC_CREAT );
 	char *addr = shmat(shmid, NULL, 0);
-	
-	system("ipcs -m");
-	while(1)
+
+	while(count--)
 	{
-		fgets(buf, sizeof(buf), stdin);
-		if(strcmp("quit", buf) == 0)
-			break;
-		else
-			strcpy(addr, buf);
+		usleep(100000);
+		printf("%s\n", addr);
+		
 	}
 	shmdt(addr);
-	system("ipcs -m");
-	
-	shmctl(shmid, IPC_RMID, NULL);
-	system("ipcs -m");
-	
-
-
 	return 0;
 }

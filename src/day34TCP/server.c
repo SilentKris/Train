@@ -19,9 +19,6 @@ void sighandler(int signum)
 
 int main(int argc, char **argv)
 {
-
-
-
 	signal(SIGINT, sighandler);
 //
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -29,7 +26,7 @@ int main(int argc, char **argv)
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(6666);
-	addr.sin_addr.s_addr = inet_addr("192.168.162.168");  //填写自己的ip地址
+	addr.sin_addr.s_addr = inet_addr("192.168.162.169");  //填写自己的ip地址
 
 	ret = bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)); // 关联sockfd和addr
 	if(-1 == ret)
@@ -57,6 +54,7 @@ int main(int argc, char **argv)
 				puts("client quit");
 				break;
 			}
+			memset(buf, 0, sizeof(buf));
 			printf("resv: %s\n", buf);
 		}
 	}
