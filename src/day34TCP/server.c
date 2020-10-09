@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
 		while(1)
 		{
-			ret = read(connfd, buf, sizeof(buf));
+			ret = recv(connfd, buf, sizeof(buf), 0);
 			if(ret <= 0)
 			{
 				puts("client quit");

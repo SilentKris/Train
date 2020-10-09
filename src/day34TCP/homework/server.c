@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <strings.h>
+#include <string.h>
 #include <unistd.h>
 #define backlog 32
 int main(void)
@@ -16,7 +17,7 @@ int main(void)
 
 	addr.sin_family=PF_INET;
 	addr.sin_port = htons(8888);
-	addr.sin_addr.s_addr = inet_addr("192.168.162.169");
+	addr.sin_addr.s_addr = inet_addr("0");
 	
 	sockfd = socket(PF_INET,SOCK_STREAM,0);
 	if(sockfd==-1){
@@ -34,20 +35,20 @@ int main(void)
 	
 	connfd = accept(sockfd,NULL,NULL);
 	
-	printf("connect a client !\n");
+	printf("connect a client, connfd:%d !\n", connfd);
 	
 	char buf[1024];
 	
 	while(1)
 	{
-		usleep(5000);
+		//usleep(5000);
 		bzero(buf,sizeof(buf));
 		ret = recv(connfd,buf,sizeof(buf),0);
 		if(ret <= 0 ){
 			printf("client quit\n");
 			break;
 		}
-		printf("recv %d bytes,buf is %s\n",ret,buf);
+		send(connfd, buf, strlen(buf), 0);
 	}
 	close(connfd);
 	close(sockfd);

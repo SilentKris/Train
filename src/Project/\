@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdarg.h>
+#include "database.h"
+
+
+void  Login(char *buf);
+void Emptywithzero(int n_values, ...);
+int  Regist(char *buf);
+
+
+int main()
+{
+	char buf[256];
+	sqlite3 *ppdb;
+
+	Createdb("chat.db", &ppdb);
+	Createtb(ppdb, "usr", "name", "passwd");
+
+	puts("Please input your acount:");
+	fgets(buf, sizeof(buf), stdin);
+
+	Login(buf);
+
+	return 0;
+}
+//注册函数
+void  Login(char *buf)
+{
+	char name[11], passwd[11];
+	char *ptr = NULL;
+	int count;
+
+	Emptywithzero(2, name, passwd);
+
+	ptr = strstr(buf, "#");
+	*ptr = '\0';
+	strncpy(name, buf, 10);
+	strncpy(passwd, ptr+1, 10);
+	
+	count = Searchdb(ppdb, custom);
+	if(count > 0)
+	{
+		puts("Welcome!");
+	}
+	else
+	{
+		puts("Your identity information does not exist, Do you need to register?(y/n)");
+		if(getchar() == 'y')
+			Regist(buf);
+		else if(getchar == 'n')
+			exit(0);
+		getchar();
+	}
+
+}
+
+int Regist(char *buf)
+{
+	char name[11], passwd[11];
+	char *ptr = NULL;
+	int count;
+
+	Emptywithzero(2, name, passwd);
+
+	ptr = strstr(buf, "#");
+	*ptr = '\0';
+	strncpy(name, buf, 10);
+	strncpy(passwd, ptr+1, 10);
+	
+	Insertdb(ppdb, usr, name, passwd);
+}
+
+
+
+//将传入的数组全部清零
+void Emptywithzero(int n_values, ...)
+{
+	va_list ap;
+	char *ptr = NULL;
+	va_start(ap, n_values);
+	
+	int i;
+	for(i=0; i<n_values; i++)
+	{
+		ptr = va_arg(ap, char *);
+		puts(ptr);
+		bzero(ptr, sizeof(ptr));
+	}
+	va_end(ap);
+
+}

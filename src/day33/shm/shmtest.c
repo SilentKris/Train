@@ -19,10 +19,13 @@ int main(int argc, char **argv)
 	char buf[N];
 	key_t key = ftok(PATHNAME, PROJ_ID);
 
-	shmid = shmget(key, SIZE, IPC_CREAT | 0666 );
+	shmid = shmget(IPC_PRIVATE, SIZE, 0);
+
 	char *addr = shmat(shmid, NULL, 0);
 	
-	system("ipcs -m");
+	//system("ipcs -m");
+	printf("get shmid : %d\n", shmid);
+#if 0
 	while(1)
 	{
 		fgets(buf, sizeof(buf), stdin);
@@ -38,6 +41,6 @@ int main(int argc, char **argv)
 	system("ipcs -m");
 	
 
-
+#endif
 	return 0;
 }

@@ -1,5 +1,6 @@
 SRC = $(wildcard *.c)
 TARGETS = $(patsubst %.c,%.o, $(SRC))
+TARGET = $(patsubst %.c, %, $(SRC))
 APP = client server
 
 ALL:client server
@@ -23,5 +24,5 @@ client.o:client.c common.h
 .PHONY:clean
 	
 clean:
-	rm $(TARGETS) $(APP)
+	rm $(TARGETS) $(TARGET) $(APP)
 	
