@@ -1,19 +1,16 @@
 #include <stdio.h>
 
-typedef struct test{
-	int i;
-	struct test *p;
-}test;
 
-test *k;
+typedef enum{Link, Thread} Ponter;
+typedef struct {
+	int data;
+	Ponter LTag;
+}test;
 int main(int argc, char **argv)
 {
+	test a;
+	printf("a.LTag = %d\n", a.LTag);
 
-	if(!k->p) 
-		printf("The value is NULL\n");
-	else 
-		puts("It has value!\n");
-	
 
 	return 0;
 }

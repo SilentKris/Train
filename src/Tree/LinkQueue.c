@@ -1,46 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define MAXSIZE 10
+#include "lq.h"
 
-typedef int QElemtype;
-
-typedef struct QueueNode{
-	QElemtype data;
-	struct QueueNode *next;
-}QNode;
-
-
-//front指向链式队列的头指针，所以队首应该是头指针指向的结点
-typedef struct {
-	QNode *front, *rear;
-	int count;
-}LinkQueue;
-
-void Traverse(LinkQueue *Q);
-bool EnQueue(LinkQueue *Q, QElemtype e);
-bool DeQueue(LinkQueue *Q, QElemtype *e);
-void LinkQueueInit(LinkQueue *Q);
-
-int main(int argc, char **argv)
-{
-	int i = 0;
-	int num, denum;
-	srand((int)time(NULL));
-	LinkQueue LQ;
-	
-	LinkQueueInit(&LQ);
-	for(; i < MAXSIZE; i++)
-	{
-		num = rand()%100;
-		EnQueue(&LQ, num);
-	}
-
-	Traverse(&LQ);
-	DeQueue(&LQ, &denum);
-	Traverse(&LQ);
-	return 0;
-}
 
 void LinkQueueInit(LinkQueue *Q)
 {
@@ -94,7 +56,7 @@ void Traverse(LinkQueue *Q)
 	while(q)
 	{
 		num++;
-		printf("The num %dst is %d\n", num, q->data);
+		printf("The num %dst is %d\n", num, q->data.data);
 		q = q->next;
 	}
 	printf("It has %d num in all\n", Q->count);

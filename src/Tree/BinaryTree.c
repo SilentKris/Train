@@ -17,7 +17,7 @@ int main()
  * #表示空树，构造二叉树链表表示二叉树T
  *
 */
-void CreateBinTree(BiTNode *T)
+void CreateBinTree(BiTNode **T)// 这里使用双重链表是因为需要将结点赋为NULL值。
 {
 	data_t ch;
 	scanf("%c", &ch);
